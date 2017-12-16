@@ -1,1 +1,4 @@
-user mail: <%= current_user.email %>
+user mail: <%= current_user.email %> <br />
+tweets: <% current_user.tweets.all.each do |tweet| %>
+   <p> <%= tweet.text %><p>
+<%end %>

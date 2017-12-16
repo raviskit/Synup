@@ -1,4 +1,10 @@
 class Tweet < ApplicationRecord
   belongs_to :user
-  validates_presence_of :text
+  has_many :likes
+  has_many :retweets
+
+  default_scope -> { order(created_at: :desc) }
+
+  validates :text, presence: true
+  validates :user_id, presence: true
 end

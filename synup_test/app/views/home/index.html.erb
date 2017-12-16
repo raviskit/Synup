@@ -1,6 +1,40 @@
 <%= form_for current_user.tweets.new  do |f|%>
   <%= f.text_area :text %>
   <%= f.submit 'Tweet'%><br />
-  <%= link_to 'Like', '#' %>
-  <%= link_to 'Retweet', '#' %><br />
+
 <% end %>
+
+
+<div>
+  <table id="tweets_table">
+    <thead>
+      <th>user</th>
+      <th>tweet</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+    <% if @all_tweets %>
+      <% @all_tweets.each do |tweet| %>
+      <% user = User.find(tweet.user_id) %>
+        <% if user %>
+          <tr>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <%= tweet.text %>
+            </td>
+            <td><%= link_to 'Like', { controller: 'tweets', action: 'like', id: tweet.id } %></td>
+            <td><%= link_to 'Retweet', '#' %></td>
+            <td>
+              <%= link_to 'destroy', tweets_path(tweet.id), method: 'delete' if current_user.id == tweet.user_id%>
+            </td>
+          </tr>
+        <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
