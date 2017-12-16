@@ -1,0 +1,6 @@
+<%= form_for current_user.tweets.new  do |f|%>
+  <%= f.text_area :text %>
+  <%= f.submit 'Tweet'%><br />
+  <%= link_to 'Like', '#' %>
+  <%= link_to 'Retweet', '#' %><br />
+<% end %>
